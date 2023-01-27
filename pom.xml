@@ -60,7 +60,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<name>christine0228/parade-${project.artifactId}:${project.version}</name>
+					<image>
+						<name>christine0228/parade-${project.artifactId}:${project.version}</name>
+					</image>
 					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 					<excludes>
 						<exclude>
