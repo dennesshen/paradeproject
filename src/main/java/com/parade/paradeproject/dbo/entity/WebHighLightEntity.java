@@ -20,9 +20,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "WEBNOTEENTITY")
-public class WebNoteEntity {
-
+@Table(name = "WEBHIGHLIGHTENTITY")
+public class WebHighLightEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@DtoPresentField
@@ -31,7 +31,27 @@ public class WebNoteEntity {
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@DtoPresentField
-	private String text;
+	private String slideId;
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@DtoPresentField
+	private String content;
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@DtoPresentField
+	private String color;
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@DtoPresentField
+	private String note;
+
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@DtoPresentField
+	private String coordinates;
 
 	@Column(name="user_id", insertable = false, updatable = false)
 	@DtoPresentField

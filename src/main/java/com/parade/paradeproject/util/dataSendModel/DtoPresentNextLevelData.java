@@ -1,7 +1,7 @@
 package com.parade.paradeproject.util.dataSendModel;
 
 /*
-* @author  Christine Hsieh 
+* @author  Christine Hsieh
 */
 
 import java.lang.annotation.ElementType;
@@ -13,8 +13,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DtoPresentNextLevelData {
 	//用來做分組包裝
-	String[] group() default {""};	
-	
+	String[] group() default {""};
+
 	//用來做是否要另外取名
 	String name() default "" ;
 }

@@ -13,29 +13,29 @@ import com.parade.paradeproject.webnote.dto.DtoOfNote;
 
 @Service
 public class WebNoteService {
-	
+
 	@Autowired
 	private UserAccountRepository userRepository;
-	
+
 	@Autowired
 	private WebNoteRepository noteRepository;
-	
+
 	@Transactional
 	public boolean addNote(DtoOfNote recieveData) {
-		
-		UserAccountEntity user = userRepository.findById(recieveData.getUserId()).get();	
-		
+
+		UserAccountEntity user = userRepository.findById(recieveData.getUserId()).get();
+
 		EntityBuilder<WebNoteEntity> noteEntityBuilder = new EntityBuilder<>();
-		
+
 		WebNoteEntity webNoteEntity =
 		noteEntityBuilder.init(new WebNoteEntity())
 						 .convertAllDtoToEntity(recieveData)
 						 .injectFieldToEntity("userAccountEntity", user)
 						 .build();
-		
+
 		noteRepository.saveAndFlush(webNoteEntity);
-		
-		
+
+
 		return true;
 	}
 }

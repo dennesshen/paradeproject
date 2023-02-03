@@ -19,22 +19,22 @@ import lombok.Setter;
 @Entity
 @Table(name = "USERACCOUNT")
 public class UserAccountEntity {
-	 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; 
-	
+	private Long id;
+
 	@Column
 	private String userName;
-	
+
 	@Column
 	private String password;
-	
+
 	@Column
 	private String authentication;
-	
-	
+
+
 	@OneToMany(mappedBy = "userAccountEntity")
 	private List<WebNoteEntity> webNoteEntity;
-	
+
 }

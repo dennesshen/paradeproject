@@ -21,32 +21,32 @@ public class GenericExceptionHandler {
 	public ResponseEntity<?> dealException(MethodArgumentNotValidException ex) {
 		List<ObjectError> errors = ex.getBindingResult().getAllErrors();
 		FieldError fieldError = (FieldError) errors.get(0);
-		String message = fieldError.getObjectName() + "." 
+		String message = fieldError.getObjectName() + "."
 					   + fieldError.getField() + " : "
 					   + fieldError.getDefaultMessage();
-		
+
 		Map<String, String> data = new LinkedHashMap<>();
-		
+
 		data.put("data", null);
 		data.put("status", "400");
 		data.put("message", message);
-		
+
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(data);
 	}
-	
-	
+
+
 	@ExceptionHandler(value = ParmeterException.class)
 	public ResponseEntity<?> dealParameterException(ParmeterException ex) {
-		
-		
+
+
 		Map<String, String> data = new LinkedHashMap<>();
-		
+
 		data.put("data", null);
 		data.put("status", "400");
 		data.put("message", ex.getMessage());
-		
+
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(data);
 	}
-	
-	
+
+
 }

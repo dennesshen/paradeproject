@@ -18,26 +18,26 @@ import com.parade.paradeproject.webnote.service.WebNoteService;
 @RestController
 @RequestMapping("/webnote")
 public class WebNoteController {
-	
+
 	@Autowired
 	private WebNoteRepository noteRepository;
-	
+
 	@Autowired
 	private WebNoteService webNoteService;
-	
+
 	@PutMapping("/add")
 	public boolean addNote(DtoOfNote recieveData) {
 		return webNoteService.addNote(recieveData);
 	}
-	
-	
+
+
 	@PostMapping("/getnote")
 	public List<DataSendModel> getNote() {
-		
+
 		return noteRepository.findAll().stream()
 									   .map(n -> DataSendModelWrapper.wrapper(n))
 									   .collect(Collectors.toList());
-		
+
 	}
-	
+
 }

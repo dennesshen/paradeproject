@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 public class DtoOfNote {
-	
+
 	private String text;
-	
+
 	@JsonIgnore
 	private Long userId = 1l;
 }

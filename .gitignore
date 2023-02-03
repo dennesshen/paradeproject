@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### java class ###
+*.class
+
 ### MAC ###
 .DS_store
 
@@ -34,3 +37,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/.metadata/
