@@ -8,6 +8,6 @@ import com.parade.paradeproject.dbo.entity.UserAccountEntity;
 @Repository
 public interface UserAccountRepository extends JpaRepository<UserAccountEntity, Long>{
 
-	
-	
+
+
 }

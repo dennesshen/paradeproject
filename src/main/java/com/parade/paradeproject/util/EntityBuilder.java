@@ -8,20 +8,20 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class EntityBuilder<T> {
-	
+
 	private T entity;
-	
+
 	private List<Field> entityFields;
-	
+
 	public EntityBuilder<T> init(T entity) {
-		
+
 		this.entity = entity;
 		this.entityFields = MyReflectionUtil.getAllFields(entity.getClass());
 		return this;
 	}
-	
 
-	
+
+
 	public <K> EntityBuilder<T> convertAllDtoToEntity(K dto) {
 
 		Field[] fields =  MyReflectionUtil.getAllFields(dto.getClass()).toArray(new Field[0]);
@@ -37,7 +37,7 @@ public class EntityBuilder<T> {
 		}
 		return this;
 	}
-	
+
 	public  EntityBuilder<T> convertMapToEntity(Map<String, Object> map) {
 
 		for(Entry<String, Object> entry : map.entrySet()) {
@@ -49,8 +49,8 @@ public class EntityBuilder<T> {
 			  }
 		}
 		return this;
-	}	
-	
+	}
+
 	public EntityBuilder<T> injectFieldToEntity(String fieldName, Object fieldValue) {
 		if (fieldValue == null) return this;
 		//System.out.println(fieldName+" : "+fieldValue);
@@ -63,7 +63,7 @@ public class EntityBuilder<T> {
 											    f.set(entity, fieldValue);
 											} catch (IllegalArgumentException e) {
 												//e.printStackTrace();
-												
+
 												if (f.getType().equals(Timestamp.class)) {
 													try {
 														LocalDateTime value = (LocalDateTime) fieldValue;
@@ -71,21 +71,21 @@ public class EntityBuilder<T> {
 													} catch (Exception e1) {
 													}
 												}
-												
-												
+
+
 											} catch (Exception e) {
 											}
 						  				}
 								);
 		return this;
-			  
+
 	}
-	
+
 	public T build() {
 
 		return this.entity;
 	}
-	
+
 	public void clear() {
 		this.entity = null;
 	}

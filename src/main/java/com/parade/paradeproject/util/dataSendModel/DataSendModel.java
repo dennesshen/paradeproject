@@ -3,7 +3,7 @@ package com.parade.paradeproject.util.dataSendModel;
 import java.util.LinkedHashMap;
 
 /*
-* @author  Christine Hsieh 
+* @author  Christine Hsieh
 */
 
 import java.util.List;
@@ -21,24 +21,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DataSendModel {
-	
+
 	private Map<String, Object> maindata;
-	
+
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Map<String, List<DataSendModelSecond>> detaildata;
-	
+
 	public DataSendModel(Map<String, Object> maindata) {
 		this.maindata = maindata;
 	}
-	
+
 	public DataSendModel(Map<String, Object> maindata, List<DataSendModelSecond> singleDetailData) {
 		this.maindata = maindata;
 		Map<String, List<DataSendModelSecond>> detaildata = new LinkedHashMap<>();
 		detaildata.put("detaildata", singleDetailData);
 		this.detaildata = detaildata;
 	}
-	
-	
+
+
 	@JsonAnyGetter
 	public Map<String, List<DataSendModelSecond>> getDetaildata() {
 		return detaildata;

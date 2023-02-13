@@ -1,6 +1,6 @@
 package com.parade.paradeproject.util.DataRecieveModel;
 /*
-* @author  Christine Hsieh 
+* @author  Christine Hsieh
 */
 
 import java.util.List;
@@ -13,13 +13,13 @@ import lombok.Data;
 
 @Data
 public abstract class DataRecieveModel_1M1D<K, T> implements RecieveModel<K> {
-	
+
 	@Valid
 	private K maindata;
-	
+
 	@Valid
 	private List<T> detaildata;
-	
+
 
 	@Override
 	@JsonIgnore
@@ -28,8 +28,8 @@ public abstract class DataRecieveModel_1M1D<K, T> implements RecieveModel<K> {
 		return null;
 	}
 
-	
-	
-	
-		
+
+
+
+
 }

@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = SqlInjectValidator.class)
 public @interface SqlInjectValid {
 
-	
+
 	String message() default "forbidden word exist";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
