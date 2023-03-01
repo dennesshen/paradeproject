@@ -5,16 +5,27 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.parade.paradeproject.slide.dto.DtoOfHttpRequest;
+
 
 @Service
 public class HttpConnectService {
 
     
     
-    public ResponseEntity<String> connect(String httpMethod, String url, String body) {
+
+    public ResponseEntity<String> connect(DtoOfHttpRequest receiveData) {
+        
+        String httpMethod = receiveData.getHttpMethod();
+        Map<String, String> headers = receiveData.getHeaders();        
+        String url = receiveData.getUrl();
+        String body = receiveData.getBody();
         
         HttpURLConnection httpConnection = null;
         
@@ -24,6 +35,13 @@ public class HttpConnectService {
             httpConnection = (HttpURLConnection)targetUrl.openConnection();
             
             httpConnection.setRequestMethod(httpMethod.toUpperCase());
+            
+            for (Entry<String, String> header : headers.entrySet()) {
+                
+                httpConnection.setRequestProperty(header.getKey(), header.getValue());
+                
+            }
+            
             
             httpConnection.connect();
             
@@ -70,6 +88,4 @@ public class HttpConnectService {
         
     }
 
-    
-    
 }
