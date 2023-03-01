@@ -20,7 +20,9 @@ public class GlobalCorsConfig {
                         .allowedOrigins("/*")
                         .allowCredentials(true)
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("/*");
+                        .allowedHeaders("/*")
+                        .exposedHeaders("Access-Control-Allow-Origin");
+                
             }
             
         };
