@@ -1,3 +1,11 @@
+setting:
+  ip:
+    prefer-net-mask: 
+
+context:
+  initializer:
+    classes: com.parade.paradeproject.config.initializer.IpAddressApplicationContextInitializer, com.parade.paradeproject.config.initializer.EurekaIpAddressApplicationContextInitializer
+    
 server:
   port: 8081
   servlet:
