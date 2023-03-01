@@ -17,14 +17,13 @@ public class GlobalCorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 
                 registry.addMapping("/**")
-                        .allowedOrigins("/*")
+                        .allowedOriginPatterns("*")
                         .allowCredentials(true)
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("/*")
-                        .exposedHeaders("Access-Control-Allow-Origin");
+                        .allowedHeaders("*");
                 
             }
-            
+     
         };
         
         
