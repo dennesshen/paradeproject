@@ -10,21 +10,27 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.parade.paradeproject.util.dataSendModel.DtoPresentField;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Getter
 @Setter
 @Entity
 @Table(name = "USERACCOUNT")
+@ToString(exclude = "webNoteEntity")
 public class UserAccountEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@DtoPresentField(group = {"b"})
 	private Long id;
 
-	@Column
+	@Column(name = "username")
+    @DtoPresentField(group = {"b"})
 	private String userName;
 
 	@Column
