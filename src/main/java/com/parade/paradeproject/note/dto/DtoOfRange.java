@@ -1,44 +1,32 @@
 package com.parade.paradeproject.note.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 public class DtoOfRange {
 
-	
-	@JsonProperty("anchor_node_parent_identifier")
-    private String anchorNodeParentIdentifier;
+    private String anchor_node_parent_identifier;
 
-    @JsonProperty("anchor_node_parent_index")
-    private Long anchorNodeParentIndex;
+    private Long anchor_node_parent_index;
 
-    @JsonProperty("anchor_node_identifier")
-    private String anchorNodeIdentifier;
+    private String anchor_node_identifier;
 
-    @JsonProperty("anchor_node_type")
-    private Integer anchorNodeType;
+    private Integer anchor_node_type;
 
-    @JsonProperty("anchor_node_index")
-    private Long anchorNodeIndex;
+    private Long anchor_node_index;
 
-    @JsonProperty("anchor_node_offset")
-    private Integer anchorNodeOffset;
+    private Integer anchor_node_offset;
 
-    @JsonProperty("focus_node_parent_identifier")
-    private String focusNodeParentIdentifier;
+    private String focus_node_parent_identifier;
 
-    @JsonProperty("focus_node_parent_index")
-    private Long focusNodeParentIndex;
+    private Long focus_node_parent_index;
 
-    @JsonProperty("focus_node_identifier")
-    private String focusNodeIdentifier;
+    private String focus_node_identifier;
 
-    @JsonProperty("focus_node_type")
-    private Integer focusNodeType;
+    private Integer focus_node_type;
 
-    @JsonProperty("focus_node_index")
-    private Long focusNodeIndex;
+    private Long focus_node_index;
 
-    @JsonProperty("focus_node_offset")
-    private Integer focusNodeOffset;
+    private Integer focus_node_offset;
     
 }

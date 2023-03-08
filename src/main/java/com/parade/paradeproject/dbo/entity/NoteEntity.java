@@ -1,5 +1,6 @@
 package com.parade.paradeproject.dbo.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class NoteEntity {
 	private Long id;
 	
 	@Column
-	private String slid_id;
+	private String slide_id;
 	
 	@Column
 	private Integer note_type;
@@ -44,7 +45,7 @@ public class NoteEntity {
 	@Column(insertable = false, updatable = false)
 	private Long range_id;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "range_id")
 	private RangeEntity rangeEntity;
 	

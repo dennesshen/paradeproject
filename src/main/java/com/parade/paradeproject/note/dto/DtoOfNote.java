@@ -8,14 +8,11 @@ import lombok.Data;
 @Data
 public class DtoOfNote {
 	
-	@JsonProperty("slide_id")
-	private String slideId;
+	private String slide_id;
 	
-	@JsonProperty("note_type")
-	private Integer noteType;
+	private Integer note_type;
 	
-	@JsonProperty("note_text")
-	private String noteText;
+	private String note_text;
 	
 	private String color;
 	

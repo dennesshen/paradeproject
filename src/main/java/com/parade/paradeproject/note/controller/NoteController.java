@@ -12,31 +12,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.parade.paradeproject.dbo.repository.HighlightRepository;
-import com.parade.paradeproject.note.dto.DtoOfHighlight;
-import com.parade.paradeproject.note.service.HighlightService;
+import com.parade.paradeproject.dbo.repository.NoteRepository;
+import com.parade.paradeproject.note.dto.DtoOfNote;
+import com.parade.paradeproject.note.service.NoteService;
 import com.parade.paradeproject.util.dataSendModel.DataSendModel;
 import com.parade.paradeproject.util.dataSendModel.DataSendModelWrapper;
 
 @RestController
-@RequestMapping("/highlight")
+@RequestMapping("/note")
 public class NoteController {
 
 	@Autowired
-	private HighlightRepository highlightRepository;
+	private NoteRepository noteRepository;
 	
 	@Autowired
-	private HighlightService highlightService;
+	private NoteService noteService;
 	
 	@PutMapping("add")
-	public ResponseEntity<Map<String, Object>> addHighlight(@RequestBody DtoOfHighlight recieveData) {
-		return highlightService.addHightlight(recieveData);
+	public ResponseEntity<Map<String, Object>> addNote(@RequestBody DtoOfNote recieveData) {
+		return noteService.addNote(recieveData);
 	}
 	
-	@PostMapping("gethghlight")
-	public List<DataSendModel> getlighlight() {
+	@PostMapping("getnote")
+	public List<DataSendModel> getNote() {
 		
-		return highlightRepository.findAll().stream()
+		return noteRepository.findAll().stream()
 											.map(n -> DataSendModelWrapper.wrapper(n))
 											.collect(Collectors.toList());
 	}

@@ -1,7 +1,5 @@
 package com.parade.paradeproject.note.service;
 
-
-import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,11 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.parade.paradeproject.dbo.entity.NoteEntity;
 import com.parade.paradeproject.dbo.entity.RangeEntity;
 import com.parade.paradeproject.dbo.entity.UserAccountEntity;
-import com.parade.paradeproject.dbo.repository.HighlightRepository;
 import com.parade.paradeproject.dbo.repository.NoteRepository;
 import com.parade.paradeproject.dbo.repository.RangeRepository;
 import com.parade.paradeproject.dbo.repository.UserAccountRepository;
-import com.parade.paradeproject.note.dto.DtoOfHighlight;
 import com.parade.paradeproject.note.dto.DtoOfNote;
 import com.parade.paradeproject.util.EntityBuilder;
 
@@ -37,20 +33,24 @@ public class NoteService {
 //	private RangeRepository rangeRepository;
 	
 	@Transactional
-	public ResponseEntity<Map<String, Object>> addHightlight(DtoOfNote recieveData) {
+	public ResponseEntity<Map<String, Object>> addNote(DtoOfNote recieveData) {
 		UserAccountEntity user = userRepository.findById(recieveData.getUserId()).get();
 		
 		EntityBuilder<NoteEntity> noteEntityBuilder = new EntityBuilder<>();
-		
-		
-		
+		EntityBuilder<RangeEntity> rangeEntityBuilder = new EntityBuilder<>();
 		
 		NoteEntity noteEntity =
 		noteEntityBuilder.init(new NoteEntity())
 							 .convertAllDtoToEntity(recieveData)
-							 .injectFieldToEntity("RangeEntity", recieveData.getRange())
 							 .injectFieldToEntity("userAccountEntity", user)
 							 .build();
+		
+		RangeEntity rangeEntity =
+		rangeEntityBuilder.init(new RangeEntity())
+						  .convertAllDtoToEntity(recieveData.getRange())
+						  .build();
+		
+		noteEntity.setRangeEntity(rangeEntity);
 		
 		noteRepository.saveAndFlush(noteEntity);
 		
