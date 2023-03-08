@@ -22,22 +22,24 @@ import com.parade.paradeproject.util.dataSendModel.DataSendModelWrapper;
 @RequestMapping("/note")
 public class NoteController {
 
-	@Autowired
-	private NoteRepository noteRepository;
-	
-	@Autowired
-	private NoteService noteService;
-	
-	@PutMapping("add")
-	public ResponseEntity<Map<String, Object>> addNote(@RequestBody DtoOfNote recieveData) {
-		return noteService.addNote(recieveData);
-	}
-	
-	@PostMapping("getnote")
-	public List<DataSendModel> getNote() {
-		
-		return noteRepository.findAll().stream()
-											.map(n -> DataSendModelWrapper.wrapper(n))
-											.collect(Collectors.toList());
-	}
+    @Autowired
+    private NoteRepository noteRepository;
+    
+    @Autowired
+    private NoteService noteService;
+    
+    @PutMapping("add")
+    public ResponseEntity<Map<String, Object>> 
+    addNote(@RequestBody DtoOfNote recieveData) {
+        return noteService.addNote(recieveData);
+    }
+    
+    @PostMapping("getnote")
+    public List<DataSendModel> getNote() {
+        
+        return noteRepository.findAll()
+                             .stream()
+                             .map(n -> DataSendModelWrapper.wrapper(n))
+                             .collect(Collectors.toList());
+    }
 }

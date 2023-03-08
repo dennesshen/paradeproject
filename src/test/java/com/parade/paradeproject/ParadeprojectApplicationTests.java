@@ -13,16 +13,16 @@ import com.parade.paradeproject.dbo.repository.UserAccountRepository;
 class ParadeprojectApplicationTests {
 
 
-	@Autowired
-	private UserAccountRepository user;
+    @Autowired
+    private UserAccountRepository user;
 
-	@Test
-	@Transactional
-	void contextLoads() {
+    @Test
+    @Transactional
+    void contextLoads() {
 
-		UserAccountEntity userAccountEntity = user.findById(1l).get();
-		System.out.println(userAccountEntity);
-	}
+        UserAccountEntity userAccountEntity = user.findById(1l).get();
+        System.out.println(userAccountEntity);
+    }
 
 
 }

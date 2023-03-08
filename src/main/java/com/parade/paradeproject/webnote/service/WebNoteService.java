@@ -9,7 +9,7 @@ import com.parade.paradeproject.dbo.entity.WebNoteEntity;
 import com.parade.paradeproject.dbo.repository.UserAccountRepository;
 import com.parade.paradeproject.dbo.repository.WebNoteRepository;
 import com.parade.paradeproject.util.EntityBuilder;
-import com.parade.paradeproject.webnote.dto.DtoOfNote;
+import com.parade.paradeproject.webnote.dto.DtoOfWebNote;
 
 @Service
 public class WebNoteService {
@@ -21,7 +21,7 @@ public class WebNoteService {
 	private WebNoteRepository noteRepository;
 
 	@Transactional
-	public boolean addNote(DtoOfNote recieveData) {
+	public boolean addNote(DtoOfWebNote recieveData) {
 
 		UserAccountEntity user = userRepository.findById(recieveData.getUserId()).get();
 

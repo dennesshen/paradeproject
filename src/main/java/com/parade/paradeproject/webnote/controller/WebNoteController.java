@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.parade.paradeproject.dbo.repository.WebNoteRepository;
 import com.parade.paradeproject.util.dataSendModel.DataSendModel;
 import com.parade.paradeproject.util.dataSendModel.DataSendModelWrapper;
-import com.parade.paradeproject.webnote.dto.DtoOfNote;
+import com.parade.paradeproject.webnote.dto.DtoOfWebNote;
 import com.parade.paradeproject.webnote.service.WebNoteService;
 
 @RestController
@@ -29,7 +29,7 @@ public class WebNoteController {
     private WebNoteService webNoteService;
     
     @PutMapping("/add")
-    public boolean addNote(@RequestBody DtoOfNote recieveData) {
+    public boolean addNote(@RequestBody DtoOfWebNote recieveData) {
         return webNoteService.addNote(recieveData);
     }
     
