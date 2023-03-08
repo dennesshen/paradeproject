@@ -1,44 +1,54 @@
 package com.parade.paradeproject.dbo.entity;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.parade.paradeproject.util.dataSendModel.DtoPresentField;
-
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "WEBNOTE")
-public class WebNoteEntity {
-	 
+@Table(name = "HIGHLIGHTENTITY")
+@EqualsAndHashCode
+public class NoteEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@DtoPresentField
-	private Long id; 
+	private Long id;
+	
+	@Column
+	private String Slid_id;
+	
+	@Column
+	private Integer note_type;
 	
 	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	@DtoPresentField
-	private String text;
+	private String note_text;
 	
-	@Column(name="user_id", insertable = false, updatable = false)
-	@DtoPresentField
-	private Long userId;
+	@Column
+	private String color;
+	
+	@Column
+	private String remark;
+	
+	@Column(insertable = false, updatable = false)
+	private Long range_id;
+	
+	@OneToOne
+	@JoinColumn(name = "range_id")
+	private RangeEntity rangeEntity;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private UserAccountEntity userAccountEntity;
-	
 }
