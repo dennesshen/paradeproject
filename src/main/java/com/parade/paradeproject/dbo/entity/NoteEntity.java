@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "HIGHLIGHTENTITY")
+@Table(name = "NOTE")
 @EqualsAndHashCode
 public class NoteEntity {
 
@@ -27,7 +27,7 @@ public class NoteEntity {
 	private Long id;
 	
 	@Column
-	private String Slid_id;
+	private String slid_id;
 	
 	@Column
 	private Integer note_type;
