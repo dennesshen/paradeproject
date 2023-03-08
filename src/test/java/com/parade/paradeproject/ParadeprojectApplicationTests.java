@@ -1,5 +1,7 @@
 package com.parade.paradeproject;
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +17,7 @@ class ParadeprojectApplicationTests {
 	private UserAccountRepository user;
 
 	@Test
+	@Transactional
 	void contextLoads() {
 
 		UserAccountEntity userAccountEntity = user.findById(1l).get();
