@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,25 +21,26 @@ import com.parade.paradeproject.webnote.service.WebNoteService;
 @RequestMapping("/webnote")
 public class WebNoteController {
 
+    
     @Autowired
     private WebNoteRepository noteRepository;
-
+    
     @Autowired
     private WebNoteService webNoteService;
-
+    
     @PutMapping("/add")
-    public boolean addNote(DtoOfNote recieveData) {
+    public boolean addNote(@RequestBody DtoOfNote recieveData) {
         return webNoteService.addNote(recieveData);
     }
-
-
+    
+    
     @PostMapping("/getnote")
     public List<DataSendModel> getNote() {
-
+        
         return noteRepository.findAll().stream()
                                        .map(n -> DataSendModelWrapper.wrapper(n))
                                        .collect(Collectors.toList());
-
+        
     }
-
+    
 }

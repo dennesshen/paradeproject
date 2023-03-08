@@ -24,23 +24,27 @@ import lombok.ToString;
 @ToString(exclude = "webNoteEntity")
 public class UserAccountEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@DtoPresentField(group = {"b"})
-	private Long id;
-
-	@Column(name = "username")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @DtoPresentField(group = {"b"})
-	private String userName;
+    private Long id;
 
-	@Column
-	private String password;
+    @Column(name = "username")
+    @DtoPresentField(group = {"b"})
+    private String userName;
 
-	@Column
-	private String authentication;
+    @Column
+    private String password;
+
+    @Column
+    private String authentication;
 
 
-	@OneToMany(mappedBy = "userAccountEntity")
-	private List<WebNoteEntity> webNoteEntity;
+    @OneToMany(mappedBy = "userAccountEntity")
+    private List<WebNoteEntity> webNoteEntity;
 
+    
+    
+    @OneToMany(mappedBy = "userAccountEntity")
+    private List<NoteEntity> noteEntities;
 }
