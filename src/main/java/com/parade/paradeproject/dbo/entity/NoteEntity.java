@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.parade.paradeproject.util.dataSendModel.DtoPresentField;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,26 +22,31 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "NOTE")
-@EqualsAndHashCode
 public class NoteEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@DtoPresentField
 	private Long id;
 	
 	@Column
+	@DtoPresentField
 	private String slide_id;
 	
 	@Column
+	@DtoPresentField
 	private Integer note_type;
 	
 	@Lob
+	@DtoPresentField
 	private String note_text;
 	
 	@Column
+	@DtoPresentField
 	private String color;
 	
 	@Column
+	@DtoPresentField
 	private String remark;
 	
 	@Column(insertable = false, updatable = false)
