@@ -37,7 +37,7 @@ public class NoteService {
 	
 	
 	@Transactional
-	public ResponseEntity<Map<String, Object>> addNote(DtoOfNote recieveData, Long note_id) {
+	public Map<String, Object> addNote(DtoOfNote recieveData, Long note_id) {
 		
 		UserAccountEntity user = userRepository.findById(recieveData.getUserId()).get();
 		
@@ -69,7 +69,7 @@ public class NoteService {
 	}
 	
 	@Transactional
-	public ResponseEntity<Map<String, Object>> deleteNote(Long id) {
+	public Map<String, Object> deleteNote(Long id) {
 		
 		noteRepository.deleteById(id);
 		
