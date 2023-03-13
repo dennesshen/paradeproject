@@ -35,7 +35,7 @@ public class UserAccountEntity {
 	
 	
 	@OneToMany(mappedBy = "userAccountEntity")
-	private List<WebNoteEntity> webNoteEntity;
+	private List<CategoryEntity> categoryEntities;
 	
 	
 	@OneToMany(mappedBy = "userAccountEntity")
