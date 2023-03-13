@@ -10,6 +10,8 @@ public class DtoOfNote {
 	
 	private String slide_id;
 	
+	private Long node_id;
+	
 	private Integer note_type;
 	
 	private String note_text;
