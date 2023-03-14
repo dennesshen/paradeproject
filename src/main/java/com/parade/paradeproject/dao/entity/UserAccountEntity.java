@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.parade.paradeproject.dao.entity.base.EntityBase;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,26 +22,25 @@ import lombok.ToString;
 @Entity
 @Table(name = "USERACCOUNT")
 @ToString(exclude = "webNoteEntity")
-public class UserAccountEntity {
-	 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; 
-	
-	@Column
-	private String userName;
-	
-	@Column
-	private String password;
-	
-	@Column
-	private String authentication;
-	
-	
-	@OneToMany(mappedBy = "userAccountEntity")
-	private List<CategoryEntity> categoryEntities;
-	
-	
-	@OneToMany(mappedBy = "userAccountEntity")
-	private List<NoteEntity> noteEntities;
+public class UserAccountEntity extends EntityBase{
+     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; 
+    
+    @Column
+    private String userName;
+    
+    @Column
+    private String password;
+    
+    @Column
+    private String authentication;
+    
+    @OneToMany(mappedBy = "userAccountEntity")
+    private List<SlideEntity> slideEntities;
+    
+    @OneToMany(mappedBy = "userAccountEntity")
+    private List<CategoryEntity> categoryEntities;
+   
 }

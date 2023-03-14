@@ -1,12 +1,12 @@
 package com.parade.paradeproject.util.exception;
 
-public class ParmeterException extends RuntimeException{
+public class ParameterException extends RuntimeException{
 
-	public ParmeterException() {
+	public ParameterException() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ParmeterException(String errormessage) {
+	public ParameterException(String errormessage) {
 		super(errormessage);
 	}
 

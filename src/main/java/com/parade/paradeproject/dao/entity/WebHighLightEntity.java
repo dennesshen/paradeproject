@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.parade.paradeproject.dao.entity.base.EntityBase;
 import com.parade.paradeproject.util.dataSendModel.DtoPresentField;
 
 import lombok.Getter;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "WEBHIGHLIGHTENTITY")
-public class WebHighLightEntity {
+public class WebHighLightEntity extends EntityBase{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
