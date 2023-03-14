@@ -11,8 +11,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DtoPresentField {
 
-	//用來做分組包裝
-	String[] group() default {""};
+    //用來做分組包裝
+    String[] group() default {""};
+    
+    boolean includeDefault() default true;
 }
 
 

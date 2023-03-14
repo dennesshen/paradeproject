@@ -15,40 +15,40 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@JsonSerialize(using = DtoSendModelSecondSerializer.class)
+@JsonSerialize(using = DataSendModelSecondSerializer.class)
 @NoArgsConstructor
 public class DataSendModelSecond {
 
 
-	private Map<String, Object> maindata;
+    private Map<String, Object> maindata;
 
-	private Map<String, List<DataSendModelSecond>> detaildata;
+    private Map<String, List<DataSendModelSecond>> detaildata;
 
-	public DataSendModelSecond(Map<String, Object> maindata) {
-		super();
-		this.maindata = maindata;
-	}
+    public DataSendModelSecond(Map<String, Object> maindata) {
+        super();
+        this.maindata = maindata;
+    }
 
-	public DataSendModelSecond(Map<String, Object> maindata,
-							   List<DataSendModelSecond> singleDetailData) {
-		super();
-		this.maindata = maindata;
-		Map<String, List<DataSendModelSecond>> map = new LinkedHashMap<>();
-		map.put("detaildata", singleDetailData);
+    public DataSendModelSecond(Map<String, Object> maindata,
+                               List<DataSendModelSecond> singleDetailData) {
+        super();
+        this.maindata = maindata;
+        Map<String, List<DataSendModelSecond>> map = new LinkedHashMap<>();
+        map.put("detaildata", singleDetailData);
 
-		this.detaildata = map;
-	}
-
-
+        this.detaildata = map;
+    }
 
 
-	public Map<String, List<DataSendModelSecond>> getDetaildata() {
-		return detaildata;
-	}
 
-	public void setDetaildata(Map<String, List<DataSendModelSecond>> detaildata) {
-		this.detaildata = detaildata;
-	}
+
+    public Map<String, List<DataSendModelSecond>> getDetaildata() {
+        return detaildata;
+    }
+
+    public void setDetaildata(Map<String, List<DataSendModelSecond>> detaildata) {
+        this.detaildata = detaildata;
+    }
 
 
 
