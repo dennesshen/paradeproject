@@ -21,10 +21,15 @@ public class NoteController {
     private NoteService noteService;
     
     @PutMapping("/{note_id}")
-    public Map<String, Object> addNote(@PathVariable(value = "note_id", required = false) 
+    public Map<String, Object> saveNote(@PathVariable(value = "note_id", required = false) 
                                                       Long noteId,
                                                       @RequestBody DtoOfNote recieveData) {
-        return noteService.addNote(recieveData, noteId);
+        return noteService.saveNote(recieveData, noteId);
+    }
+    
+    @PutMapping("/")
+    public Map<String, Object> saveNote(@RequestBody DtoOfNote recieveData) {
+        return noteService.saveNote(recieveData, 0L);
     }
     
     

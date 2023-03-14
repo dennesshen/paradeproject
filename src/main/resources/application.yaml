@@ -19,6 +19,8 @@ spring:
     encoding: UTF-8
   h2:
     console:
+      settings:
+        web-allow-others: true
       enabled: true
     
   datasource:
@@ -31,6 +33,9 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect 
     show-sql: true
     hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: update
     
     

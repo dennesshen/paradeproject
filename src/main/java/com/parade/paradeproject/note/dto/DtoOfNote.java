@@ -6,21 +6,21 @@ import lombok.Data;
 
 @Data
 public class DtoOfNote {
-	
-	private String slide_id;
-	
-	private Long node_id;
-	
-	private Integer note_type;
-	
-	private String note_text;
-	
-	private String color;
-	
-	private String remark;
-	
-	private DtoOfRange range;
-	
-	@JsonIgnore
-	private Long userId = 1l;
+    
+    private Integer note_type;
+    
+    private String note_text;
+    
+    private String color;
+    
+    private String remark;
+    
+    @JsonIgnore
+    private Long userId = 1l;
+    
+    private Long slide_id;
+    
+    private DtoOfRange range;
+
+
 }

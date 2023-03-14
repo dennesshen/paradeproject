@@ -12,11 +12,14 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DtoPresentNextLevelData {
-	//用來做分組包裝
-	String[] group() default {""};
+    //用來做分組包裝
+    String[] group() default {""};
 
-	//用來做是否要另外取名
-	String name() default "" ;
+    //用來做是否要另外取名
+    String name() default "" ;
+    
+    boolean includeDefault() default true;
+
 }
 
 

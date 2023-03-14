@@ -9,15 +9,15 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
-public class DtoSendModelSecondSerializer extends StdSerializer<DataSendModelSecond>{
+public class DataSendModelSecondSerializer extends StdSerializer<DataSendModelSecond>{
 
-	public DtoSendModelSecondSerializer() {
+	public DataSendModelSecondSerializer() {
 		this(null);
 	}
 
 
 
-	public DtoSendModelSecondSerializer(Class<DataSendModelSecond> d) {
+	public DataSendModelSecondSerializer(Class<DataSendModelSecond> d) {
 		super(d);
 	}
 
