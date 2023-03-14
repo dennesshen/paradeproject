@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.parade.paradeproject.dbo.repository.WebHighLightRepository;
+import com.parade.paradeproject.dao.repository.WebHighLightRepository;
 import com.parade.paradeproject.util.dataSendModel.DataSendModel;
 import com.parade.paradeproject.util.dataSendModel.DataSendModelWrapper;
 import com.parade.paradeproject.webhighlight.dto.DtoOfHighLight;

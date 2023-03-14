@@ -3,21 +3,16 @@ package com.parade.paradeproject.note.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.Entity;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.parade.paradeproject.dbo.entity.NoteEntity;
-import com.parade.paradeproject.dbo.entity.RangeEntity;
-import com.parade.paradeproject.dbo.entity.UserAccountEntity;
-import com.parade.paradeproject.dbo.repository.NoteRepository;
-import com.parade.paradeproject.dbo.repository.UserAccountRepository;
+import com.parade.paradeproject.dao.entity.NoteEntity;
+import com.parade.paradeproject.dao.entity.RangeEntity;
+import com.parade.paradeproject.dao.entity.UserAccountEntity;
+import com.parade.paradeproject.dao.repository.NoteRepository;
+import com.parade.paradeproject.dao.repository.UserAccountRepository;
 import com.parade.paradeproject.note.dto.DtoOfNote;
-import com.parade.paradeproject.util.EntityBuilder;
 import com.parade.paradeproject.util.EntityBuilder2;
 
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.parade.paradeproject.dbo.entity;
+package com.parade.paradeproject.dao.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

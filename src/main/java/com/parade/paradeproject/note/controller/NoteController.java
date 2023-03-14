@@ -16,29 +16,6 @@ import com.parade.paradeproject.note.service.NoteService;
 @RestController
 @RequestMapping("/note")
 public class NoteController {
-<<<<<<< HEAD
-
-    @Autowired
-    private NoteRepository noteRepository;
-    
-    @Autowired
-    private NoteService noteService;
-    
-    @PutMapping("add")
-    public ResponseEntity<Map<String, Object>> 
-    addNote(@RequestBody DtoOfNote recieveData) {
-        return noteService.addNote(recieveData);
-    }
-    
-    @PostMapping("getnote")
-    public List<DataSendModel> getNote() {
-        
-        return noteRepository.findAll()
-                             .stream()
-                             .map(n -> DataSendModelWrapper.wrapper(n))
-                             .collect(Collectors.toList());
-    }
-=======
 	
     @Autowired
     private NoteService noteService;
@@ -55,5 +32,5 @@ public class NoteController {
     public Map<String, Object> deleteNote(@PathVariable(value = "note_id") Long id) {
         return noteService.deleteNote(id);
     }    
->>>>>>> origin/Category_module
+
 }

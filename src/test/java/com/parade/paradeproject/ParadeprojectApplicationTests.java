@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.parade.paradeproject.dbo.entity.UserAccountEntity;
-import com.parade.paradeproject.dbo.repository.UserAccountRepository;
+import com.parade.paradeproject.dao.entity.UserAccountEntity;
+import com.parade.paradeproject.dao.repository.UserAccountRepository;
 
 @SpringBootTest
 class ParadeprojectApplicationTests {

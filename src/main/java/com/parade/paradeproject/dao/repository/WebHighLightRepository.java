@@ -1,9 +1,9 @@
-package com.parade.paradeproject.dbo.repository;
+package com.parade.paradeproject.dao.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.parade.paradeproject.dbo.entity.WebHighLightEntity;
+import com.parade.paradeproject.dao.entity.WebHighLightEntity;
 
 @Repository
 public interface WebHighLightRepository extends JpaRepository<WebHighLightEntity, Long>{

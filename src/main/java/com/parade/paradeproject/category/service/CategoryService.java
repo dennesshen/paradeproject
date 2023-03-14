@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.parade.paradeproject.category.dto.DtoOfCategory;
-import com.parade.paradeproject.dbo.entity.CategoryEntity;
-import com.parade.paradeproject.dbo.entity.UserAccountEntity;
-import com.parade.paradeproject.dbo.repository.CategoryRepository;
-import com.parade.paradeproject.dbo.repository.UserAccountRepository;
+import com.parade.paradeproject.dao.entity.CategoryEntity;
+import com.parade.paradeproject.dao.entity.UserAccountEntity;
+import com.parade.paradeproject.dao.repository.CategoryRepository;
+import com.parade.paradeproject.dao.repository.UserAccountRepository;
 import com.parade.paradeproject.util.EntityBuilder2;
 
 import lombok.extern.slf4j.Slf4j;

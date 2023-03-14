@@ -1,4 +1,4 @@
-package com.parade.paradeproject.dbo.entity;
+package com.parade.paradeproject.dao.entity;
 
 import java.util.List;
 
@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.parade.paradeproject.util.dataSendModel.DtoPresentField;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,32 +21,6 @@ import lombok.ToString;
 @Table(name = "USERACCOUNT")
 @ToString(exclude = "webNoteEntity")
 public class UserAccountEntity {
-<<<<<<< HEAD
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @DtoPresentField(group = {"b"})
-    private Long id;
-
-    @Column(name = "username")
-    @DtoPresentField(group = {"b"})
-    private String userName;
-
-    @Column
-    private String password;
-
-    @Column
-    private String authentication;
-
-
-    @OneToMany(mappedBy = "userAccountEntity")
-    private List<WebNoteEntity> webNoteEntity;
-
-    
-    
-    @OneToMany(mappedBy = "userAccountEntity")
-    private List<NoteEntity> noteEntities;
-=======
 	 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,5 +42,4 @@ public class UserAccountEntity {
 	
 	@OneToMany(mappedBy = "userAccountEntity")
 	private List<NoteEntity> noteEntities;
->>>>>>> origin/Category_module
 }

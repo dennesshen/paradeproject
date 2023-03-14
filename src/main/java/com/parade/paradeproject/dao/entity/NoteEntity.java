@@ -1,4 +1,4 @@
-package com.parade.paradeproject.dbo.entity;
+package com.parade.paradeproject.dao.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
