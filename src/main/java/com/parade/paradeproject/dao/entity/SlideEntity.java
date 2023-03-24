@@ -3,6 +3,7 @@ package com.parade.paradeproject.dao.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -56,7 +57,13 @@ public class SlideEntity extends EntityBase{
     @DtoPresentNextLevelData(name = "note_data", group = "getOne", includeDefault = false)
     private List<NoteEntity> noteEntities;
     
+    @DtoPresentField
+    @Column(updatable = false, insertable = false)
+    private String category_id;
     
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryEntity categoryEntity;
     
     
 
