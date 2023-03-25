@@ -16,7 +16,7 @@ import com.parade.paradeproject.note.service.NoteService;
 @RestController
 @RequestMapping("/note")
 public class NoteController {
-	
+    
     @Autowired
     private NoteService noteService;
     

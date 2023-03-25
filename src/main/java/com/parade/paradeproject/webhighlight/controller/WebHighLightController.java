@@ -19,22 +19,22 @@ import com.parade.paradeproject.webhighlight.service.WebHighLightService;
 @RequestMapping("/webhighlight")
 public class WebHighLightController {
 
-	@Autowired
-	private WebHighLightRepository highLightRepository;
+    @Autowired
+    private WebHighLightRepository highLightRepository;
 
-	@Autowired
-	private WebHighLightService highLightService;
-	
-	@PutMapping("/createhighlighter")
-	public boolean createHighLighter(DtoOfHighLight recieveData) {
-		return highLightService.createHighLighter(recieveData);
-	}
-	
-	@PostMapping("/gethighlighter")
-	public List<DataSendModel> getHighLigh() {
-		return highLightRepository.findAll().stream()
-				   .map(n -> DataSendModelWrapper.wrapper(n))
-				   .collect(Collectors.toList());
+    @Autowired
+    private WebHighLightService highLightService;
+    
+    @PutMapping("/createhighlighter")
+    public boolean createHighLighter(DtoOfHighLight recieveData) {
+        return highLightService.createHighLighter(recieveData);
+    }
+    
+    @PostMapping("/gethighlighter")
+    public List<DataSendModel> getHighLigh() {
+        return highLightRepository.findAll().stream()
+                   .map(n -> DataSendModelWrapper.wrapper(n))
+                   .collect(Collectors.toList());
 
-	}
+    }
 }

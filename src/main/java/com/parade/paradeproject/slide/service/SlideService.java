@@ -65,7 +65,7 @@ public class SlideService {
         SlideEntity slideEntity = slideRepository.findById(slideId)
                                                  .orElse(new SlideEntity());
         CategoryEntity categoryEntity = categoryRepository.findById(dtoOfSlide.getCategory_id())
-        												  .get();
+                                                          .get();
         
         
         EntityBuilder2.init(slideEntity)

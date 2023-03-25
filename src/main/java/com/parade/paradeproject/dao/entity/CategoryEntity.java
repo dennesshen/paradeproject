@@ -44,15 +44,13 @@ public class CategoryEntity extends EntityBase{
     private Integer sequence;
     
     @Column
-    @DtoPresentField
-    private Boolean status;
+    private Boolean isVisible;
     
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserAccountEntity userAccountEntity;
     
     @OneToMany(mappedBy = "categoryEntity", cascade = CascadeType.ALL)
-    @DtoPresentNextLevelData(name = "slide_data")
     private List<SlideEntity> slideEntities;
     
 }

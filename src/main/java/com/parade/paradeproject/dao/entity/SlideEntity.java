@@ -48,6 +48,10 @@ public class SlideEntity extends EntityBase{
     @Lob
     @DtoPresentField(group = "getOne")
     private String pictureUrl;
+
+    @DtoPresentField
+    @Column(updatable = false, insertable = false)
+    private String category_id;
     
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -56,11 +60,7 @@ public class SlideEntity extends EntityBase{
     @OneToMany(mappedBy = "slideEntity", cascade = CascadeType.ALL)
     @DtoPresentNextLevelData(name = "note_data", group = "getOne", includeDefault = false)
     private List<NoteEntity> noteEntities;
-    
-    @DtoPresentField
-    @Column(updatable = false, insertable = false)
-    private String category_id;
-    
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private CategoryEntity categoryEntity;
