@@ -1,7 +1,7 @@
 package com.parade.paradeproject.dao.entity;
 
-import java.util.List;
-
+import com.parade.paradeproject.dao.entity.base.EntityBase;
+import com.parade.paradeproject.util.dataSendModel.DtoPresentField;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,15 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.parade.paradeproject.dao.entity.base.EntityBase;
-import com.parade.paradeproject.util.dataSendModel.DtoPresentField;
-import com.parade.paradeproject.util.dataSendModel.DtoPresentNextLevelData;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -43,7 +39,7 @@ public class CategoryEntity extends EntityBase{
     @DtoPresentField
     private Integer sequence;
     
-    @Column
+    @Column(nullable = false)
     private Boolean isVisible;
     
     @ManyToOne

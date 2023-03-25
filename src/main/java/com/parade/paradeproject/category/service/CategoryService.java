@@ -37,6 +37,7 @@ public class CategoryService {
                                  .get()
                                  .getSlideEntities()
                                  .stream()
+                                 .filter(slide -> slide.getIsVisible())
                                  .map(slide -> DataSendModelWrapper.wrapper(slide))
                                  .collect(Collectors.toList());
     }
@@ -65,9 +66,6 @@ public class CategoryService {
 
 
 
-
-
-
     @Transactional
     public boolean save(Long categoryId, DtoOfCategory dtoOfCategory) {
         
@@ -80,9 +78,10 @@ public class CategoryService {
         categoryEntity = 
         EntityBuilder2.init(categoryEntity)
                       .convertAllDtoToEntity(dtoOfCategory)
-
                       .injectFieldToEntity("userAccountEntity", user)
                       .build();
+
+        if (categoryEntity.getIsVisible()==null) categoryEntity.setIsVisible(true);
         
         categoryRepository.saveAndFlush(categoryEntity);
         
@@ -93,11 +92,12 @@ public class CategoryService {
 
 
     @Transactional
-    public boolean changeVisible(Long id, String visible) {
+    public boolean changeVisible(Long id, Boolean isVisible) {
 
         CategoryEntity categoryEntity = categoryRepository.findById(id).get();
 
-        categoryEntity.setIsVisible(visible.equals("Y"));
+        categoryEntity.setIsVisible(isVisible);
+        categoryRepository.saveAndFlush(categoryEntity);
 
         return true;
     }

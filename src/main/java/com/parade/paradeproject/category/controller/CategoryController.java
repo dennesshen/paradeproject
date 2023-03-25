@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @RestController
@@ -73,8 +72,8 @@ public class CategoryController {
                description = "visible='N'表示關閉，visible='Y'表示開啟")
     public boolean deleteCategory(@PathVariable(value = "category_id")
                                   Long category_id,
-                                  @Pattern(regexp = "[NY]")@RequestParam(name = "is_visible")
-                                  String isVisible) {
+                                  @RequestParam(name = "is_visible")
+                                  Boolean isVisible) {
         
         return categoryService.changeVisible(category_id, isVisible);
     }

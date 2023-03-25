@@ -13,7 +13,6 @@ public class DtoOfCategory {
     
     private Integer sequence;
 
-    private Boolean status;
     @JsonIgnore
     private Long userId = 1l;
 }

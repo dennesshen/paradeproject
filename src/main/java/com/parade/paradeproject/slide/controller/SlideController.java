@@ -33,7 +33,7 @@ public class SlideController {
     private SlideService slideService;
     
     @GetMapping("/")
-    @Operation(summary = "取得使用者所有slide資料")
+    @Operation(summary = "取得使用者所有slide資料，僅會回傳visible=true的slide資料")
     private List<DataSendModel> getAll() {
         return slideService.getAll();
     }

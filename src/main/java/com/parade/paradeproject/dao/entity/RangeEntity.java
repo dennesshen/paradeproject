@@ -1,5 +1,7 @@
 package com.parade.paradeproject.dao.entity;
 
+import com.parade.paradeproject.dao.entity.base.EntityBase;
+import com.parade.paradeproject.util.dataSendModel.DtoPresentField;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -8,14 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.parade.paradeproject.dao.entity.base.EntityBase;
-import com.parade.paradeproject.util.dataSendModel.DtoPresentField;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Setter
