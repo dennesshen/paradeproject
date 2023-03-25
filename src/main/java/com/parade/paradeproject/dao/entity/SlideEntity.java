@@ -40,6 +40,13 @@ public class SlideEntity extends EntityBase{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @DtoPresentField(group = "getOne")
     private Long id;
+
+    @Column
+    @DtoPresentField(group = "getOne")
+    private String title;
+
+    @Column(nullable = false)
+    private Boolean isVisible;
     
     @Lob
     @DtoPresentField(group = "getOne")

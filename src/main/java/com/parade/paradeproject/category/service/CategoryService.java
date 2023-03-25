@@ -80,6 +80,7 @@ public class CategoryService {
         categoryEntity = 
         EntityBuilder2.init(categoryEntity)
                       .convertAllDtoToEntity(dtoOfCategory)
+
                       .injectFieldToEntity("userAccountEntity", user)
                       .build();
         
@@ -100,6 +101,7 @@ public class CategoryService {
 
         return true;
     }
+
 
 
 }

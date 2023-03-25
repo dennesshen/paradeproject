@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import com.parade.paradeproject.util.exception.SystemServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,8 +14,9 @@ import com.parade.paradeproject.util.exception.ParameterException;
 public class GenericExceptionHandler {
     
     
-    @ExceptionHandler(value = {NoSuchElementException.class, 
-                               ParameterException.class})
+    @ExceptionHandler(value = {NoSuchElementException.class,
+                               ParameterException.class,
+                               SystemServiceException.class})
     public ResponseEntity<?> dealException(Exception ex) {
 
         Map<String, String> data = new LinkedHashMap<>();

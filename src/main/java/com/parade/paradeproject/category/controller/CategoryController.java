@@ -23,7 +23,6 @@ public class CategoryController {
     
     @Autowired
     private CategoryService categoryService;
-    
 
     
     @GetMapping("/find/slide")
@@ -32,6 +31,7 @@ public class CategoryController {
     getAllSlideByCategory(@RequestParam("category_id") Long categoryId) {
         
         return categoryService.getAllSlideByCategory(categoryId);
+
     }
 
     @GetMapping("/find/note")
@@ -41,7 +41,6 @@ public class CategoryController {
 
         return categoryService.getAllNoteByCategory(categoryId);
     }
-
 
 
     @GetMapping("/")
