@@ -36,6 +36,7 @@ public class SlideService {
 
         return slideRepository.findAll()
                               .stream()
+                              .filter(slide -> slide.getIsVisible())
                               .map(s -> DataSendModelWrapper.wrapper(s))
                               .collect(Collectors.toList());
         
@@ -67,18 +68,23 @@ public class SlideService {
         EntityBuilder2.init(slideEntity)
                       .injectFieldToEntity("userAccountEntity", user)
                       .convertAllDtoToEntity(dtoOfSlide);
-        
+
+        if (slideEntity.getIsVisible()==null) slideEntity.setIsVisible(true);
+
         slideRepository.saveAndFlush(slideEntity);
         
         return true;
         
     }
 
-    public boolean delete(Long slideId) {
+    public boolean changeVisible(Long slideId, Boolean isVisible) {
         
-        slideRepository.deleteById(slideId);
-        
+        SlideEntity slideEntity = slideRepository.findById(slideId).get();
+        slideEntity.setIsVisible(isVisible);
+        slideRepository.saveAndFlush(slideEntity);
+
         return true;
+
     }
 
 

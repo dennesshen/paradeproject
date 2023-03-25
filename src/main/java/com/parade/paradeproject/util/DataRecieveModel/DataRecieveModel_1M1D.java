@@ -14,19 +14,19 @@ import lombok.Data;
 @Data
 public abstract class DataRecieveModel_1M1D<K, T> implements RecieveModel<K> {
 
-	@Valid
-	private K maindata;
+    @Valid
+    private K maindata;
 
-	@Valid
-	private List<T> detaildata;
+    @Valid
+    private List<T> detaildata;
 
 
-	@Override
-	@JsonIgnore
-	public Object getMaindataId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    @JsonIgnore
+    public Object getMaindataId() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 
 

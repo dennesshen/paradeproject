@@ -23,43 +23,43 @@ import lombok.Setter;
 @Entity
 @Table(name = "WEBHIGHLIGHTENTITY")
 public class WebHighLightEntity extends EntityBase{
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@DtoPresentField
-	private Long id;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @DtoPresentField
+    private Long id;
 
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	@DtoPresentField
-	private String slideId;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @DtoPresentField
+    private String slideId;
 
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	@DtoPresentField
-	private String content;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @DtoPresentField
+    private String content;
 
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	@DtoPresentField
-	private String color;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @DtoPresentField
+    private String color;
 
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	@DtoPresentField
-	private String note;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @DtoPresentField
+    private String note;
 
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	@DtoPresentField
-	private String coordinates;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @DtoPresentField
+    private String coordinates;
 
-	@Column(name="user_id", insertable = false, updatable = false)
-	@DtoPresentField
-	private Long userId;
+    @Column(name="user_id", insertable = false, updatable = false)
+    @DtoPresentField
+    private Long userId;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private UserAccountEntity userAccountEntity;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserAccountEntity userAccountEntity;
 
 }

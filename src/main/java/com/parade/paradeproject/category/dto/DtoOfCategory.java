@@ -6,15 +6,15 @@ import lombok.Data;
 
 @Data
 public class DtoOfCategory {
-	
-	private Long category_id;
-	
-	private String title; 
-	
-	private Integer sequence;
-	
-	private Boolean status;
-	
-	@JsonIgnore
-	private Long userId = 1l;
+    
+    private Long category_id;
+    
+    private String title; 
+    
+    private Integer sequence;
+    
+    private Boolean status;
+    
+    @JsonIgnore
+    private Long userId = 1l;
 }
