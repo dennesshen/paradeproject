@@ -3,11 +3,11 @@ package com.parade.paradeproject.util.DataRecieveModel;
 
 public interface RecieveModel <K> {
 
-	 K getMaindata();
+     K getMaindata();
 
-	 void setMaindata(K k);
+     void setMaindata(K k);
 
-	 Object getMaindataId();
+     Object getMaindataId();
 
 
 }

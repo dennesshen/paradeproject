@@ -1,7 +1,7 @@
 package com.parade.paradeproject.category.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,8 @@ import com.parade.paradeproject.dao.entity.UserAccountEntity;
 import com.parade.paradeproject.dao.repository.CategoryRepository;
 import com.parade.paradeproject.dao.repository.UserAccountRepository;
 import com.parade.paradeproject.util.EntityBuilder2;
+import com.parade.paradeproject.util.dataSendModel.DataSendModel;
+import com.parade.paradeproject.util.dataSendModel.DataSendModelWrapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,68 +22,84 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class CategoryService {
 
-	@Autowired
-	private UserAccountRepository userRepository;
-	
-	@Autowired
-	private CategoryRepository categoryRepository;
-	
-	@Transactional
-	public Map<String, Object> addCategory(DtoOfCategory recieveData, String title) {
-		
-		UserAccountEntity user = userRepository.findById(recieveData.getUserId()).get();
-		
-		title = title == null ? "New Category" : title;
-		recieveData.setTitle(title);
-		
-		CategoryEntity categoryEntity = 
-		categoryRepository.findById(recieveData.getCategory_id()).orElse(new CategoryEntity());
-		
-		categoryEntity = 
-		EntityBuilder2.init(categoryEntity)
-		              .convertAllDtoToEntity(recieveData)
-					  .injectFieldToEntity("userAccountEntity", user)
-					  .build();
-		
-		categoryRepository.saveAndFlush(categoryEntity);
-		
-		Map<String, Object> result = new HashMap<>();
-	    result.put("rtn_code", categoryEntity.getId());
-	    result.put("rtn_msg", "成功新增category");
-	    
-		return result;
-	}
-	
-	@Transactional
-	public Map<String, Object> updateCategory(DtoOfCategory recieveData, Long id) {
-		
-		CategoryEntity categoryEntity =
-		categoryRepository.findById(id).orElse(null);
-		
-		categoryEntity = EntityBuilder2.init(categoryEntity)
-				.convertAllDtoToEntity(recieveData)
-				.build();
-		
-		categoryRepository.saveAndFlush(categoryEntity);
-		
-		Map<String, Object> result = new HashMap<>();
-	    result.put("rtn_code", categoryEntity.getId());
-	    result.put("rtn_msg", "成功修改category");
-		return result;
-	}
-	
-	@Transactional
-	public Map<String, Object> deleteCategory(Long id) {
-		
-		CategoryEntity categoryEntity =
-		categoryRepository.findById(id).orElse(null);
-		
-		categoryEntity.setStatus(false);
-		
-		Map<String, Object> result = new HashMap<>();
-	    result.put("rtn_code", categoryEntity.getId());
-	    result.put("rtn_msg", "成功刪除category");
-	    
-		return result;
-	}
+    @Autowired
+    private UserAccountRepository userRepository;
+    
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+
+
+    @Transactional(readOnly = true)
+    public List<DataSendModel> getAllSlideByCategory(Long categoryId) {
+
+        return categoryRepository.findById(categoryId)
+                                 .get()
+                                 .getSlideEntities()
+                                 .stream()
+                                 .map(slide -> DataSendModelWrapper.wrapper(slide))
+                                 .collect(Collectors.toList());
+    }
+
+    public List<DataSendModel> getAllNoteByCategory(Long categoryId) {
+
+        return categoryRepository.findById(categoryId)
+                .get()
+                .getSlideEntities()
+                .stream()
+                .flatMap(slide -> slide.getNoteEntities().stream())
+                .map(note -> DataSendModelWrapper.wrapper(note))
+                .collect(Collectors.toList());
+    }
+
+
+
+    @Transactional(readOnly = true)
+    public List<DataSendModel> getAll() {
+
+        return categoryRepository.findAll()
+                                 .stream()
+                                 .map(s -> DataSendModelWrapper.wrapper(s))
+                                 .collect(Collectors.toList());
+    }
+
+
+
+
+
+
+    @Transactional
+    public boolean save(Long categoryId, DtoOfCategory dtoOfCategory) {
+        
+        UserAccountEntity user = userRepository.findById(dtoOfCategory.getUserId()).get();
+        
+        CategoryEntity categoryEntity = 
+        categoryRepository.findById(categoryId)
+                          .orElse(new CategoryEntity());
+        
+        categoryEntity = 
+        EntityBuilder2.init(categoryEntity)
+                      .convertAllDtoToEntity(dtoOfCategory)
+                      .injectFieldToEntity("userAccountEntity", user)
+                      .build();
+        
+        categoryRepository.saveAndFlush(categoryEntity);
+        
+        return true;
+    }
+    
+
+
+
+    @Transactional
+    public boolean changeVisible(Long id, String visible) {
+
+        CategoryEntity categoryEntity = categoryRepository.findById(id).get();
+
+        categoryEntity.setIsVisible(visible.equals("Y"));
+
+        return true;
+    }
+
+
 }

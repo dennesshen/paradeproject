@@ -16,32 +16,32 @@ import com.parade.paradeproject.webhighlight.dto.DtoOfHighLight;
 @Service
 public class WebHighLightService {
 
-	@Autowired
-	private UserAccountRepository userRepository;
-	
-	@Autowired
-	private WebHighLightRepository highLightRepository;
-	
-	@Transactional
-	public boolean createHighLighter(DtoOfHighLight recieveData) {
-		
-		UserAccountEntity user = userRepository.findById(recieveData.getUserId()).get();
-		
-		EntityBuilder<WebHighLightEntity> highLightBuilder = new EntityBuilder<>();
-		
-		WebHighLightEntity webHighLightEntity =
-		highLightBuilder.init(new WebHighLightEntity())
-						.convertAllDtoToEntity(recieveData)
-						.injectFieldToEntity("userAccountEntity", user)
-						.build();
-		
-		String coordinates = Arrays.toString(recieveData.getXy());
-		webHighLightEntity.setCoordinates(coordinates);
-		
-		highLightRepository.saveAndFlush(webHighLightEntity);
-		
-		return true;
-	}
+    @Autowired
+    private UserAccountRepository userRepository;
+    
+    @Autowired
+    private WebHighLightRepository highLightRepository;
+    
+    @Transactional
+    public boolean createHighLighter(DtoOfHighLight recieveData) {
+        
+        UserAccountEntity user = userRepository.findById(recieveData.getUserId()).get();
+        
+        EntityBuilder<WebHighLightEntity> highLightBuilder = new EntityBuilder<>();
+        
+        WebHighLightEntity webHighLightEntity =
+        highLightBuilder.init(new WebHighLightEntity())
+                        .convertAllDtoToEntity(recieveData)
+                        .injectFieldToEntity("userAccountEntity", user)
+                        .build();
+        
+        String coordinates = Arrays.toString(recieveData.getXy());
+        webHighLightEntity.setCoordinates(coordinates);
+        
+        highLightRepository.saveAndFlush(webHighLightEntity);
+        
+        return true;
+    }
 }
 
 

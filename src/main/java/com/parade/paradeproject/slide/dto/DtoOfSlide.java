@@ -12,4 +12,5 @@ public class DtoOfSlide {
 
     private String pictureUrl;
 
+    private Long category_id;
 }
