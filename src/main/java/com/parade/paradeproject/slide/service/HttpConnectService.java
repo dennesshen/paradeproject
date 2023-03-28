@@ -5,15 +5,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.parade.paradeproject.util.exception.HttpForwardException;
-import com.parade.paradeproject.util.exception.SystemServiceException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -56,10 +53,9 @@ public class HttpConnectService {
             }
             
             int code = httpConnection.getResponseCode();
-            
+
+
             StringBuffer message = new StringBuffer();
-
-
             if (code == 200) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
                 
@@ -75,7 +71,7 @@ public class HttpConnectService {
                 return ResponseEntity.ok().body(new HttpRecord(html, title, image));
             }
             
-            throw new HttpForwardException("轉發失敗", code);
+            throw new HttpForwardException("轉發失敗，錯誤代碼:" + code, code);
             
             
         } catch (HttpForwardException e){
@@ -136,7 +132,7 @@ public class HttpConnectService {
 
     private String changeHref(StringBuffer message, String OriginUrl) {
 
-        String domainName = OriginUrl.substring(0, findThirdSlash(OriginUrl));
+        String domainName = findDomainName(OriginUrl);
 
         String regex = "(?:scr|href)=\"((?:~/|/[^/])[^\"]*)\"";
         Pattern pattern = Pattern.compile(regex);
@@ -160,18 +156,17 @@ public class HttpConnectService {
 
     }
 
-    private int findThirdSlash(String originUrl) {
+    private String findDomainName(String originUrl) {
 
-            int count = 0;
-            int index = 0;
+        String regex = "(?:http|https)://([^/]+)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(originUrl);
 
-            while (count < 3) {
-                index = originUrl.indexOf("/", index + 1);
-                count++;
-            }
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
 
-            return index;
-
+        throw new HttpForwardException("轉發失敗，網址格式錯誤", 400);
     }
 
 

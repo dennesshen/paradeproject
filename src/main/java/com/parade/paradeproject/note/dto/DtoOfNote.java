@@ -14,6 +14,10 @@ public class DtoOfNote {
     private String color;
     
     private String remark;
+
+    private String range_x;
+
+    private String range_y;
     
     @JsonIgnore
     private Long userId = 1l;

@@ -55,6 +55,14 @@ public class NoteEntity extends EntityBase{
     @Column
     @DtoPresentField
     private String remark;
+
+    @Column
+    @DtoPresentField
+    private String position_x;
+
+    @Column
+    @DtoPresentField
+    private String position_y;
     
     @DtoPresentField
     @Column(insertable = false, updatable = false)

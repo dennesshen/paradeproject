@@ -58,7 +58,7 @@ public class SlideService {
 
     
     @Transactional
-    public boolean save(Long slideId, DtoOfSlide dtoOfSlide) {
+    public Long save(Long slideId, DtoOfSlide dtoOfSlide) {
         
         
         UserAccountEntity user = userRepository.findById(1L).get();
@@ -76,9 +76,9 @@ public class SlideService {
 
         if (slideEntity.getIsVisible()==null) slideEntity.setIsVisible(true);
 
-        slideRepository.saveAndFlush(slideEntity);
+
         
-        return true;
+        return slideRepository.saveAndFlush(slideEntity).getId();
         
     }
 

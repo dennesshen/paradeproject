@@ -52,7 +52,7 @@ public class CategoryController {
 
     @PutMapping("/")
     @Operation(summary = "沒有帶category_id視為新增資料")
-    public boolean addCategory(@RequestBody DtoOfCategory dtoOfCategory) {
+    public Long addCategory(@RequestBody DtoOfCategory dtoOfCategory) {
         
         return categoryService.save(0L, dtoOfCategory);
     }
@@ -60,8 +60,8 @@ public class CategoryController {
 
     @PutMapping("/{category_id}")
     @Operation(summary = "帶category_id視為修改categoryId資料")
-    public boolean updateCategory(@PathVariable(value = "category_id") Long categoryId,
-                                  @RequestBody DtoOfCategory dtoOfCategory) {
+    public Long updateCategory(@PathVariable(value = "category_id") Long categoryId,
+                               @RequestBody DtoOfCategory dtoOfCategory) {
         
         return categoryService.save(categoryId, dtoOfCategory);
     }

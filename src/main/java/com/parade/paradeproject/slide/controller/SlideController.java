@@ -48,7 +48,7 @@ public class SlideController {
     
     @Operation(summary = "沒有帶slide_id視為新增資料")
     @PutMapping("/")
-    private boolean saveSlide(@RequestBody@Validated DtoOfSlide dtoOfSlide) {
+    private Long saveSlide(@RequestBody@Validated DtoOfSlide dtoOfSlide) {
 
        return slideService.save(0L, dtoOfSlide);
 
@@ -56,8 +56,8 @@ public class SlideController {
     
     @Operation(summary = "帶slide_id視為修改該slideId資料")
     @PutMapping("/{slide_id}")
-    private boolean saveSlide(@PathVariable(value = "slide_id", required = false) Long slideId,
-                              @RequestBody@Validated DtoOfSlide dtoOfSlide) {
+    private Long saveSlide(@PathVariable(value = "slide_id", required = false) Long slideId,
+                           @RequestBody@Validated DtoOfSlide dtoOfSlide) {
         return slideService.save(slideId, dtoOfSlide);
     }
     

@@ -43,7 +43,6 @@ public class NoteService {
         NoteEntity noteEntity = noteRepository.findById(note_id)
                                               .orElse(new NoteEntity());
 
-        noteEntity.setId(note_id);
         noteEntity = EntityBuilder2.init(noteEntity)
                                    .convertAllDtoToEntity(recieveData)
                                    .injectFieldToEntity("userAccountEntity", user)
@@ -51,13 +50,15 @@ public class NoteService {
                                    .build();
                     
         
-        RangeEntity rangeEntity =
-        EntityBuilder2.init(new RangeEntity())
-                          .convertAllDtoToEntity(recieveData.getRange())
-                          .build();
-        
+        RangeEntity rangeEntity = noteEntity.getRangeEntity();
+        if(rangeEntity == null) rangeEntity = new RangeEntity();
+
+        EntityBuilder2.init(rangeEntity)
+                      .convertAllDtoToEntity(recieveData.getRange())
+                      .build();
+
         noteEntity.setRangeEntity(rangeEntity);
-        
+
         noteRepository.saveAndFlush(noteEntity);
         
         Map<String, Object> result = new HashMap<>();

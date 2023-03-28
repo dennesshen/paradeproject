@@ -67,7 +67,7 @@ public class CategoryService {
 
 
     @Transactional
-    public boolean save(Long categoryId, DtoOfCategory dtoOfCategory) {
+    public Long save(Long categoryId, DtoOfCategory dtoOfCategory) {
         
         UserAccountEntity user = userRepository.findById(dtoOfCategory.getUserId()).get();
         
@@ -83,9 +83,9 @@ public class CategoryService {
 
         if (categoryEntity.getIsVisible()==null) categoryEntity.setIsVisible(true);
         
-        categoryRepository.saveAndFlush(categoryEntity);
+
         
-        return true;
+        return categoryRepository.saveAndFlush(categoryEntity).getId();
     }
     
 
