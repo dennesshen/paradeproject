@@ -17,7 +17,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Getter
 @Setter
 @Entity
-@Table(name = "RANGE")
+@Table(name = "RANGE_TABLE")
 @EntityListeners(AuditingEntityListener.class)
 public class RangeEntity extends EntityBase{
     

@@ -45,6 +45,7 @@ public class NoteEntity extends EntityBase{
     private Integer note_type;
     
     @Lob
+    @Column
     @DtoPresentField(group = "getOne")
     private String note_text;
     
@@ -70,7 +71,7 @@ public class NoteEntity extends EntityBase{
     
     @DtoPresentField
     @Column(updatable = false, insertable = false)
-    private String slide_id;
+    private Long slide_id;
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "range_id")

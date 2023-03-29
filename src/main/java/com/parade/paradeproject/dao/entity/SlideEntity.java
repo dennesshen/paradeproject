@@ -58,7 +58,7 @@ public class SlideEntity extends EntityBase{
 
     @DtoPresentField
     @Column(updatable = false, insertable = false)
-    private String category_id;
+    private Long category_id;
     
     @ManyToOne
     @JoinColumn(name = "user_id")
