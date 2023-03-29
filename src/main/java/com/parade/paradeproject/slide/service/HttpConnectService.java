@@ -134,7 +134,7 @@ public class HttpConnectService {
 
         String domainName = findDomainName(OriginUrl);
 
-        String regex = "(?:scr|href)=\"((?:~/|/[^/])[^\"]*)\"";
+        String regex = "(?:src|href)=(?:\"|\')((?:~/|/[^/])[^\"\']*)(?:\"|\')";
         Pattern pattern = Pattern.compile(regex);
 
         Matcher matcher = pattern.matcher(message.toString());
@@ -158,7 +158,7 @@ public class HttpConnectService {
 
     private String findDomainName(String originUrl) {
 
-        String regex = "(?:http|https)://([^/]+)";
+        String regex = "((?:http|https)://[^/]+)";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(originUrl);
 
