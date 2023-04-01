@@ -19,7 +19,7 @@ public class GlobalCorsConfig {
                 registry.addMapping("/**")
                         .allowedOriginPatterns("*")
                         .allowCredentials(true)
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
                         .allowedHeaders("*");
                 
             }
