@@ -15,9 +15,9 @@ public class DtoOfNote {
     
     private String remark;
 
-    private Long range_x;
+    private Long position_x;
 
-    private Long range_y;
+    private Long position_y;
     
     @JsonIgnore
     private Long userId = 1l;
