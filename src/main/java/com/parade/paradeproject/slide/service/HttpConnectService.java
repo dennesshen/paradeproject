@@ -10,7 +10,9 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.parade.paradeproject.config.htmlchange.HtmlRegexList;
 import com.parade.paradeproject.util.exception.HttpForwardException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ import com.parade.paradeproject.slide.dto.DtoOfHttpRequest;
 
 @Service
 public class HttpConnectService {
+
+    @Autowired
+    private HtmlRegexList htmlRegexList;
 
     public ResponseEntity<HttpRecord> connect(DtoOfHttpRequest receiveData) {
         
@@ -64,7 +69,7 @@ public class HttpConnectService {
                     message.append(line + "\n");
                 }
 
-                String html = changeHref(message, url);
+                String html = changeHtml(message, url);
                 String title = findMetaTitle(message);
                 String image = findMetaImage(message);
 
@@ -90,10 +95,6 @@ public class HttpConnectService {
             }
 
         }
-        
-                
-                
-
         
     }
 
@@ -130,31 +131,41 @@ public class HttpConnectService {
 
     }
 
-    private String changeHref(StringBuffer message, String OriginUrl) {
+    private String changeHtml(StringBuffer message, String OriginUrl) {
 
         String domainName = findDomainName(OriginUrl);
 
-        String regex = "(?:src|href)=(?:\"|\')((?:~/|/[^/])[^\"\']*)(?:\"|\')";
+        for (Entry<Long, String> regex : htmlRegexList.regexList().entrySet()) {
+            message = addDomainInUrl(message, domainName, regex.getValue());
+        }
+
+        return message.toString();
+
+    }
+
+    private StringBuffer addDomainInUrl(StringBuffer message,
+                                        String domainName,
+                                        String regex) {
+
         Pattern pattern = Pattern.compile(regex);
 
         Matcher matcher = pattern.matcher(message.toString());
 
         StringBuffer result = new StringBuffer();
         while (matcher.find()) {
-            String href = matcher.group(1);
-            if (href.startsWith("/")) {
-                href = matcher.group().replace(href, domainName + href);
+            String url = matcher.group(1);
+            if (url.startsWith("/")) {
+                url = matcher.group().replace(url, domainName + url);
             }
-            if (href.startsWith("~")) {
-                href = matcher.group().replace(href, domainName + href.substring(1));
+            if (url.startsWith("~")) {
+                url = matcher.group().replace(url, domainName + url.substring(1));
             }
-            matcher.appendReplacement(result, href);
+            matcher.appendReplacement(result, url);
         }
         matcher.appendTail(result);
-
-        return result.toString();
-
+        return result;
     }
+
 
     private String findDomainName(String originUrl) {
 
