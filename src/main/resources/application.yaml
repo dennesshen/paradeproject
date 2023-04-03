@@ -25,11 +25,19 @@ spring:
   
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
-    show-sql: true
     hibernate:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: update
+  data:
+    jdbc:
+      repositories:
+        enabled: false
 
 
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug

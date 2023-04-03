@@ -1,6 +1,14 @@
 package com.parade.paradeproject.slide.service;
 
+import com.parade.paradeproject.config.htmlchange.HtmlRegexList;
+import com.parade.paradeproject.slide.dto.DtoOfHttpRequest;
+import com.parade.paradeproject.util.exception.HttpForwardException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -9,14 +17,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.parade.paradeproject.config.htmlchange.HtmlRegexList;
-import com.parade.paradeproject.util.exception.HttpForwardException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
-import com.parade.paradeproject.slide.dto.DtoOfHttpRequest;
 
 
 @Service
@@ -31,14 +31,14 @@ public class HttpConnectService {
         Map<String, String> headers = receiveData.getHeaders();        
         String url = receiveData.getUrl();
         String body = receiveData.getBody();
-        
+
         HttpURLConnection httpConnection = null;
-        
-        try {
+
+        try{
+
             URL targetUrl = new URL(url);
-            
             httpConnection = (HttpURLConnection)targetUrl.openConnection();
-            
+
             httpConnection.setRequestMethod(httpMethod.toUpperCase());
             
             for (Entry<String, String> header : headers.entrySet()) {
@@ -46,11 +46,10 @@ public class HttpConnectService {
                 httpConnection.setRequestProperty(header.getKey(), header.getValue());
                 
             }
-            
-            
+
             httpConnection.connect();
             
-            if (!httpMethod.toUpperCase().equals("GET") && body != null) {
+            if (!httpMethod.equalsIgnoreCase("GET") && body != null) {
                 OutputStream out = httpConnection.getOutputStream();
                 out.write(body.getBytes());
                 out.flush();
@@ -60,14 +59,9 @@ public class HttpConnectService {
             int code = httpConnection.getResponseCode();
 
 
-            StringBuffer message = new StringBuffer();
             if (code == 200) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
-                
-                String line = null;
-                while(( line = reader.readLine()) != null) {
-                    message.append(line + "\n");
-                }
+
+                StringBuffer message = readHttpRespond(httpConnection);
 
                 String html = changeHtml(message, url);
                 String title = findMetaTitle(message);
@@ -84,12 +78,12 @@ public class HttpConnectService {
             throw e;
 
         } catch (Exception e) {
-            
+
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
             
         } finally {
-            
+
             if (httpConnection != null) {
                 httpConnection.disconnect();
             }
@@ -98,42 +92,25 @@ public class HttpConnectService {
         
     }
 
-    private String findMetaTitle(StringBuffer message) {
-        String regex = "<meta property=\"og:title\" content=\"(.*)\"[^>]*>";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(message.toString());
+    private StringBuffer readHttpRespond(HttpURLConnection httpConnection) throws IOException {
 
-        String title = "";
-        if (matcher.find()){
+        StringBuffer message = new StringBuffer();
 
-            title = matcher.group(1);
+        BufferedReader reader =
+        new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
 
+        String line;
+        while(( line = reader.readLine()) != null) {
+            message.append(line + "\n");
         }
-
-        return title;
+        reader.close();
+        return message;
 
     }
 
-    private String findMetaImage(StringBuffer message) {
+    private String changeHtml(StringBuffer message, String originUrl) {
 
-        String regex = "<meta property=\"og:image\" content=\"(.*)\"[^>]*>";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(message.toString());
-
-        String image = "";
-        if (matcher.find()){
-
-            image = matcher.group(1);
-
-        }
-
-        return image;
-
-    }
-
-    private String changeHtml(StringBuffer message, String OriginUrl) {
-
-        String domainName = findDomainName(OriginUrl);
+        String domainName = findDomainName(originUrl);
 
         for (Entry<Long, String> regex : htmlRegexList.regexList().entrySet()) {
             message = addDomainInUrl(message, domainName, regex.getValue());
@@ -141,6 +118,19 @@ public class HttpConnectService {
 
         return message.toString();
 
+    }
+
+    private String findDomainName(String originUrl) {
+
+        String regex = "((?:http|https)://[^/]+)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(originUrl);
+
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+
+        throw new HttpForwardException("轉發失敗，網址格式錯誤", 400);
     }
 
     private StringBuffer addDomainInUrl(StringBuffer message,
@@ -164,22 +154,43 @@ public class HttpConnectService {
         }
         matcher.appendTail(result);
         return result;
+
     }
 
 
-    private String findDomainName(String originUrl) {
 
-        String regex = "((?:http|https)://[^/]+)";
+    private String findMetaTitle(StringBuffer message) {
+        String regex = "<meta property=\"og:title\" content=\"([^\"]*)\"[^>]*>";
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(originUrl);
+        Matcher matcher = pattern.matcher(message.toString());
 
-        if (matcher.find()) {
-            return matcher.group(1);
+        String title = "";
+        if (matcher.find()){
+
+            title = matcher.group(1);
+
         }
 
-        throw new HttpForwardException("轉發失敗，網址格式錯誤", 400);
+        return title;
+
     }
 
+    private String findMetaImage(StringBuffer message) {
+
+        String regex = "<meta property=\"og:image\" content=\"([^\"]*)\"[^>]*>";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(message.toString());
+
+        String image = "";
+        if (matcher.find()){
+
+            image = matcher.group(1);
+
+        }
+
+        return image;
+
+    }
 
     public record HttpRecord(String html, String title, String image_url) {}
 
