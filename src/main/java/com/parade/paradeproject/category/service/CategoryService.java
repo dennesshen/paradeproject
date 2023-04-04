@@ -56,10 +56,11 @@ public class CategoryService {
 
 
     @Transactional(readOnly = true)
-    public List<DataSendModel> getAll() {
+    public List<DataSendModel> getAll(Boolean checkVisible) {
 
         return categoryRepository.findAll()
                                  .stream()
+                                 .filter(c -> !checkVisible || c.getIsVisible())
                                  .map(s -> DataSendModelWrapper.wrapper(s))
                                  .collect(Collectors.toList());
     }

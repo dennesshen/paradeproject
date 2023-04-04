@@ -43,10 +43,15 @@ public class CategoryController {
 
 
     @GetMapping("/")
-    @Operation(summary = "取得使用者所有category資料")
-    private List<DataSendModel> getAll() {
+    @Operation(summary = "取得使用者所有category資料",
+               description = "若checkVisible=true則只取得visible='Y'的資料，否則取得所有資料，"
+                           + "可以不帶checkVisible的參數，預設默認是false")
+    private List<DataSendModel> getAll(@RequestParam(name = "checkVisible",
+                                                     required = false,
+                                                     defaultValue = "false")
+                                       Boolean checkVisible) {
 
-        return categoryService.getAll();
+        return categoryService.getAll(checkVisible);
     }
 
 

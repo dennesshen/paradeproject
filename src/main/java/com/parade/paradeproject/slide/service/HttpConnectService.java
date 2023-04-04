@@ -158,7 +158,6 @@ public class HttpConnectService {
     }
 
 
-
     private String findMetaTitle(StringBuffer message) {
         String regex = "<meta property=\"og:title\" content=\"([^\"]*)\"[^>]*>";
         Pattern pattern = Pattern.compile(regex);
