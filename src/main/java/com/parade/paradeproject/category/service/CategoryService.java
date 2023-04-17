@@ -18,6 +18,7 @@ import com.parade.paradeproject.util.dataSendModel.DataSendModelWrapper;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Slf4j
 @Service
 public class CategoryService {
@@ -61,8 +62,8 @@ public class CategoryService {
         return categoryRepository.findAll()
                                  .stream()
                                  .filter(c -> !checkVisible || c.getIsVisible())
-                                 .map(s -> DataSendModelWrapper.wrapper(s))
-                                 .collect(Collectors.toList());
+                                 .map(DataSendModelWrapper::wrapper)
+                                 .toList();
     }
 
 

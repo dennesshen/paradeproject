@@ -20,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 public class IpAddressApplicationContextInitializer 
     implements ApplicationContextInitializer<ConfigurableApplicationContext>{
 
-    
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
         
@@ -44,7 +43,15 @@ public class IpAddressApplicationContextInitializer
         
         
         Map<String, Object> map = new HashMap<>();
-        map.put("server.address", getLocalIpAddress(preferNetMask));
+
+        String ipadress = getLocalIpAddress(preferNetMask);
+
+        if (ipadress == null) {
+            log.error("ip address not found, use default");
+            return;
+        }
+
+        map.put("server.address", ipadress);
         
         map.entrySet().stream().forEach(m -> log.info(m.getKey()+":"+m.getValue()));
         
