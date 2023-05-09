@@ -3,6 +3,7 @@ package com.parade.paradeproject.category.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.parade.paradeproject.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,8 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public List<DataSendModel> getAllSlideByCategory(Long categoryId) {
+
+        Long userId = UserUtil.getUserId();
 
         return categoryRepository.findById(categoryId)
                                  .get()

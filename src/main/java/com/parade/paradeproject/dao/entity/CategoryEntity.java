@@ -41,6 +41,9 @@ public class CategoryEntity extends EntityBase{
     
     @Column(nullable = false)
     private Boolean isVisible;
+
+    @Column(name = "user_id", updatable = false, insertable = false)
+    private Long userId;
     
     @ManyToOne
     @JoinColumn(name = "user_id")
