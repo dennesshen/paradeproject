@@ -2,9 +2,11 @@ package com.parade.paradeproject.category.controller;
 
 import com.parade.paradeproject.category.dto.DtoOfCategory;
 import com.parade.paradeproject.category.service.CategoryService;
+import com.parade.paradeproject.config.security.ParadeUser;
 import com.parade.paradeproject.util.dataSendModel.DataSendModel;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +30,7 @@ public class CategoryController {
     @Operation(summary = "取得指定category_id的category其下所關聯之slide資料")
     private List<DataSendModel>
     getAllSlideByCategory(@RequestParam("category_id") Long categoryId) {
-        
+
         return categoryService.getAllSlideByCategory(categoryId);
 
     }

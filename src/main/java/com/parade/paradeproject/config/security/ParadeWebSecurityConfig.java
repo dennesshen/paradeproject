@@ -40,7 +40,7 @@ public class ParadeWebSecurityConfig {
 
          http.csrf().disable()
              .authorizeRequests()
-             .antMatchers("/auth/login").permitAll()
+             .antMatchers("/auth/login", "/auth/test").permitAll()
              .antMatchers("/swagger-ui/**",
                           "/swagger-resources/**",
                           "/v3/api-docs/**").permitAll()

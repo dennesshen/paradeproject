@@ -2,7 +2,9 @@ package com.parade.paradeproject.note.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.parade.paradeproject.util.UserUtil;
 import lombok.Data;
+import org.springframework.security.core.userdetails.User;
 
 @Data
 public class DtoOfNote {
@@ -20,7 +22,7 @@ public class DtoOfNote {
     private Long position_y;
     
     @JsonIgnore
-    private Long userId = 1l;
+    private Long userId = UserUtil.getUserId();
     
     private Long slide_id;
     

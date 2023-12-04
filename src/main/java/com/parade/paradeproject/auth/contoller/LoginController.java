@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Date;
 
 /**
  * @author christinehsieh on 2023/5/3
@@ -26,6 +25,8 @@ public class LoginController {
     @Autowired
     private JwtToken jwtToken;
 
+
+
     @PostMapping("/login")
     public String login(@Valid@RequestBody DtoOfLogin dtoOfLogin) {
 
@@ -37,7 +38,16 @@ public class LoginController {
         String jwt = jwtToken.generateToken(authentication);
 
         return jwt;
+
     }
+
+    @GetMapping("/test")
+    public String test() throws InterruptedException {
+        Thread.sleep(2000);
+        return "test" + new Date();
+    }
+
+
 
 
 }

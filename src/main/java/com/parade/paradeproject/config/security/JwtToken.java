@@ -63,6 +63,7 @@ public class JwtToken {
     }
 
     public UsernamePasswordAuthenticationToken toAuthentication(String jwt) {
+
         Claims claims = Jwts.parser().setSigningKey(Security).parseClaimsJws(jwt).getBody();
 
         String username = claims.get("username").toString();
